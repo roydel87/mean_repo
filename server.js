@@ -6,5 +6,5 @@ app.get('/',function(req,res){
   res.sendFile(path.join(__dirname)+'/index.html');
 });
 
-app.listen(1337);
+app.listen(80);
 console.log('Here we go!');
