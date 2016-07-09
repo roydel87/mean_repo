@@ -1,0 +1,22 @@
+{
+  "name": "curso-mean",
+  "version": "1.0.0",
+  "description": "Aplicacion para aprender MEAN",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/roydel87/mean_repo.git"
+  },
+  "author": "roydel87",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/roydel87/mean_repo/issues"
+  },
+  "homepage": "https://github.com/roydel87/mean_repo#readme",
+  "dependencies": {
+    "express": "^4.14.0"
+  }
+}
