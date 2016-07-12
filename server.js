@@ -85,6 +85,23 @@ errorRouter.get('/',function(req,res){
 app.use('/admin',adminRouter);
 app.use('/login',loginRouter);
 app.use('/error',errorRouter);
+app.route('/account')
+.get(function(req,res){
+  console.log('Metodo GET');
+  res.send('Metodo GET');
+})
+.post(function(req,res){
+  console.log('Metodo POST');
+  res.send('Metodo POST');
+})
+.put(function(req,res){
+  console.log('Metodo PUT');
+  res.send('Metodo PUT');
+})
+.delete(function(req,res){
+  console.log('Metodo DELETE');
+  res.send('Metodo DELETE');
+});
 
 app.set('port',(process.env.PORT || 5000));
 app.listen(app.get('port'));
