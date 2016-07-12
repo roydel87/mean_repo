@@ -2,6 +2,8 @@ var express = require('express');
 var app = express();
 var path = require('path');
 var adminRouter = express.Router();
+var loginRouter = express.Router();
+var errorRouter = express.Router();
 
 app.get('/',function(req,res){
   res.sendFile(path.join(__dirname)+'/index.html');
@@ -20,6 +22,46 @@ adminRouter.param('name',function(req,res,next,name){
   next();
 });
 
+loginRouter.use(function(req,res,next){
+  console.log('login --->',req.method,req.url);
+  next();
+});
+
+loginRouter.param('user',function(req,res,next,user){
+  console.log("req",req.user);
+  console.log("user",user);
+  var userName = 'admin';
+
+  if(userName == user){
+    req.user = user;
+    next();
+  }
+  else {
+    console.log("Usuario invalido");
+    res.redirect('/error');
+  }
+});
+
+loginRouter.param('password',function(req,res,next,password){
+  var userPassword = 'admin1234';
+  if(userPassword == password){
+    req.password = password;
+    next();
+  }
+  else {
+    console.log("contrasena incorrecta");
+    res.redirect('/error');
+  }
+});
+
+loginRouter.get('/',function(req,res){
+  res.send('Necesita ingresar usuario');
+})
+
+loginRouter.get('/:user/:password',function(req,res){
+  res.send('Ingreso como ' + req.user + ' y password: '+ req.password);
+});
+
 adminRouter.get('/',function(req,res){
   res.send('Estoy en la pagina principal del admin');
 });
@@ -36,7 +78,13 @@ adminRouter.get('/posts',function(req,res){
   res.send('Aqui se mostraran los articulos');
 });
 
+errorRouter.get('/',function(req,res){
+  res.send('Usuario o contrasena invalidos');
+});
+
 app.use('/admin',adminRouter);
+app.use('/login',loginRouter);
+app.use('/error',errorRouter);
 
 app.set('port',(process.env.PORT || 5000));
 app.listen(app.get('port'));
