@@ -1,0 +1,22 @@
+[
+  {
+    "name":"pikachu",
+    "type":"electric"
+  },
+  {
+    "name":"squirtle",
+    "type":"water"
+  },
+  {
+    "name":"charmander",
+    "type":"fire"
+  },
+  {
+    "name":"pidgeot",
+    "type":"air"
+  },
+  {
+    "name":"bulbasour",
+    "type":"plant"
+  }
+]

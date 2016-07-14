@@ -1,0 +1,18 @@
+mongoose
+rethinkdb --tiempo real
+firebase
+browsersync
+
+
+sudo mkdir /data
+sudo mkdir /data/db
+
+sudo chmod 777 /data
+sudo chmod 777 /data/db
+
+sudo mongod
+mongod --dbpath path
+
+MONGODB
+show databases
+se crea db con el primer query

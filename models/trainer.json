@@ -1,0 +1,16 @@
+[{
+  "name":"Ash",
+  "lastname": "Ketchum",
+  "city":"Paleta"
+  },
+  {
+    "name":"Misty",
+    "lastname": "WaterFlower",
+    "city":"Celeste"
+  },
+  {
+      "name":"Red",
+      "lastname": "Apple",
+      "city":"Paleta"
+  }
+]

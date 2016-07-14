@@ -1,9 +1,16 @@
+var mongoose = require('mongoose');
+mongoose.connect('mongodb://localhost/pokemon');
+//mongoose.connect('mongodb://mongouser@mongouser')
+console.log('here-->'+mongoose);
+console.log(mongoose);
+
 var express = require('express');
 var app = express();
 var path = require('path');
 var adminRouter = express.Router();
 var loginRouter = express.Router();
 var errorRouter = express.Router();
+
 
 app.get('/',function(req,res){
   res.sendFile(path.join(__dirname)+'/index.html');
