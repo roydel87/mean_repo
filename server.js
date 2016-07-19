@@ -27,8 +27,8 @@ app.use(function(req,res,next){
 });
 
 app.use(morgan('dev'));
-mongoose.connect('mongodb://localhost/pokemon');
-//mongoose.connect('mongodb://mongouser:mongouser')
+//mongoose.connect('mongodb://localhost/pokemon');
+mongoose.connect('mongodb://mongouser:mongouser@ds015750.mlab.com:15750/pokemon_rdh')
 
 
 //API ROUTES
