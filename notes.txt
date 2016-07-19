@@ -16,3 +16,6 @@ mongod --dbpath path
 MONGODB
 show databases
 se crea db con el primer query
+
+
+heroku logs -t --app curso-mean-rdh
