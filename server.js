@@ -118,16 +118,28 @@ apiRouter.route('/users/:user_id')
 
 apiRouter.route('/pokemons')
 .get(function(req,res){
-  Pokemon.find(function(err, pokemons) {
-      if (err) return res.send(err);
-      res.json(pokemons);
+  //Pokemon.find(function(err, pokemons) {
+  //    if (err) return res.send(err);
+  //    res.json(pokemons);
+  //})
+  Pokemon.find({},function(err,pokemons){
+    User.populate(pokemons,{
+      path: 'owner',
+      select: {name:1,username:1},
+      match: {username:'usertest'}
+    },function(err,pokemons){
+      res.status(200).json(pokemons);
+    })
   })
+  //.skip(4).limit(3)
+  //.sort({name:-1})
+  .select({name:1,type:1,owner:1})
 })
 .post(function(req,res){
   var pokemon = new Pokemon();
   pokemon.name = req.body.name;
   pokemon.type = req.body.type;
-  pokemon.timesFound = req.body.timesFound;
+  pokemon.owner = req.body.owner;
 
   pokemon.save(function(err) {
       //verify duplicate entry on username
@@ -163,6 +175,7 @@ apiRouter.route('/pokemons/:pokemon_id')
           if (err) return res.send(err);
           if (req.body.name) pokemon.name = req.body.name;
           if (req.body.type) pokemon.type = req.body.type;
+          if(req.body.owner) pokemon.owner = req.body.owner;
 
           pokemon.save(function(err) {
               if (err) return res.send(err);
@@ -178,6 +191,26 @@ apiRouter.route('/pokemons/:pokemon_id')
   },function(err,pokemon){
     if(err) return res.send(err);
     res.json({message:'Pokemon eliminado'});
+  })
+})
+
+apiRouter.route('/pokemons/type/:type')
+.get(function(req,res){
+  Pokemon.find({
+    //type: /lectric/i
+    //type:req.params.type
+    //type:new RegExp(req.params.type,'i'),
+    //name: /chu/i
+    $or: [{type:/Electric/i},{type:/fire/i}],
+    //timesFound: {
+      //$gt:0,
+      //$lt:2
+    //},
+    timesFound:{
+      $in:[1,0]
+    }
+  },function(err,pokemons){
+    res.json(pokemons);
   })
 })
   //register our ROUTES

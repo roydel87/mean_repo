@@ -19,3 +19,12 @@ se crea db con el primer query
 
 
 heroku logs -t --app curso-mean-rdh
+
+
+Queries
+JSON
+QueryBuilder
+
+
+Relaciones
+type: User --> schema.objectId

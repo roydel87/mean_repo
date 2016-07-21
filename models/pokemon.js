@@ -12,7 +12,15 @@ var pokemonSchema = new Schema({
     }
   },
   type: String,
-  timesFound: Number
+  timesFound:{
+    type:Number,
+    default: 0
+  },
+  owner:{
+    type:Schema.ObjectId,
+    ref:'User'
+  }
+
 });
 
 pokemonSchema.methods.sayHi = function(){
