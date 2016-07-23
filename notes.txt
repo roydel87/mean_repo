@@ -28,3 +28,17 @@ QueryBuilder
 
 Relaciones
 type: User --> schema.objectId
+
+
+SEGURIDAD:
+Jwt -> json web token
+
+header -> typ : JWT, alg: HS256
+payload -> iss:genera token
+           sub: tema del token
+           aud: audiencia
+           exp: expiracion
+           nbf: tiempo despues del cual no se acepta
+           iat: fecha creacion y hora
+           jti: identificador unico
+signature -> hash compuesto por Header + Payload + Secret:password

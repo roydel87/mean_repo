@@ -7,10 +7,13 @@ var adminRouter = express.Router();
 // var errorRouter = express.Router();
 var bodyParser = require('body-parser');
 var morgan = require('morgan');
+var jwt = require('jsonwebtoken');
 
 var mongoose = require('mongoose');
 var User = require('./models/users');
 var Pokemon = require('./models/pokemon');
+
+var supersecret = 'strangeThingsHappenInArea51';
 
 var port = process.env.PORT || 5000;
 
@@ -45,11 +48,88 @@ app.get('/', function(req, res) {
 var apiRouter = express.Router();
 
 //http://localhost:5000/api
+
+apiRouter.post('/authenticate',function(req,res){
+  User.findOne({
+    username: req.body.username
+  })
+  .select('name username password')
+  .exec(function(err,user){
+    if(err) throw err;
+
+    //username not found
+    if(!user){
+      res.json({
+        success:false,
+        message:'La autenticacion ha fallado. El usuario no existe'
+      })
+    }else if(user){
+      //validate if password matches
+      var validPassword = user.comparePassword(req.body.password);
+      if(!validPassword){
+        res.json({
+          success: false,
+          message: 'La autenticacion ha fallado. Contrasenia incorrecta'
+        })
+      }else{
+        //If authenticate process is OK then
+        //generate token
+        //var token = jwt.sign(payload,secretOrPrivatekey,option,callback)
+        var token = jwt.sign({
+          name: user.name,
+          username: user.username
+        },supersecret,{
+          expiresIn: '100'
+        }
+        )
+        res.json({
+          success:true,
+          message: 'Swordfish: Acceso autorizado',
+          token: token
+        })
+      }
+    }
+  })
+})
+
+
+//middleware to verify the token
+apiRouter.use(function(req,res,next){
+  console.log('Alguien ha entrado a la matrix!');
+  var token = req.body.token || req.query.token || req.headers['x-access-token'];
+  if(token){
+    //verify token
+    jwt.verify(token,supersecret,function(err,decoded){
+      if(err){
+        return res.json({
+          success: false,
+          message: 'Fallo la autentificacion del token.'
+        })
+      }else{
+        console.log(decoded);
+        req.decoded = decoded;
+        next();
+      }
+    })
+  }else{
+    return res.status(403).send({
+      success: false,
+      message: 'No se envio el token.'
+    })
+  }
+})
+
 apiRouter.get('/', function(req, res) {
     res.json({
         message: 'Welcome to Zion! (Our mother API)'
     })
 });
+
+apiRouter.get('/me',function(req,res){
+  res.json({
+    message: 'Welcome ' + req.decoded.name + ', username: ' + req.decoded.username
+  })
+})
 
 //routes users
 apiRouter.route('/users')
