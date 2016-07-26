@@ -42,3 +42,14 @@ payload -> iss:genera token
            iat: fecha creacion y hora
            jti: identificador unico
 signature -> hash compuesto por Header + Payload + Secret:password
+
+
+ANGULAR:
+angular1 -> ES5
+angular2 -> ES6
+
+Single Page Application
+
+
+php -S 127.0.0.1:5000
+python -m SimpleHTTPServer
