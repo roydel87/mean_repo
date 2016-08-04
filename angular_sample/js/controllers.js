@@ -38,7 +38,7 @@ angular.module('myApp.controllers',[])
     searchCity(abr);
   }
 
-  console.log(cityService.getcity('SFO'));
+  //console.log(cityService.getcity('SFO'));
 
   console.log($scope.message);
 })
@@ -59,3 +59,28 @@ angular.module('myApp.controllers',[])
     $scope.$apply(updateClock);
   },1000)
 })
+.controller('citiesCtrl', function($scope, cityService) {
+      $scope.cities = cityService.getCities();
+
+      $scope.myLink = "http://google.com";
+
+      $scope.fields =[
+        {placeholder: 'abbr', isRequired:true},
+        {placeholder: 'name', isRequired:true}
+      ];
+
+      $scope.searchCity = function(cityAbbr){
+        $scope.oneCity = cityService.getCity(cityAbbr)[0];
+      }
+
+      $scope.filtrarCities = function(cityAbbr){
+        $scope.cities = cityService.getCity(cityAbbr);
+      }
+
+      $scope.multiplicar = function (){
+        $scope.result = Number($scope.myNumber)*5;
+      }
+      $scope.generateNumber = function(){
+        return (Math.floor(Math.random()*10)+1);
+      }
+});
