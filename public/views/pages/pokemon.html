@@ -1,6 +1,57 @@
 <div>
   <h1>Pokemon Page</h1>
-  <p>
-    {{pokemon.message}}
-  </p>
+
+  <div>
+      <ul class="list mt++">
+            <li class="list-row list-row--has-separator" ng-repeat="poke in pokemon.Pokemons">
+                <div class="list-row__primary">
+                    <img src="../../bd_pokemon/pokemons/{{poke.name}}.jpg" width="40" height="40" class="img-round">
+                </div>
+
+                <div class="list-row__content">
+                    <span>{{poke.name}}</span>
+                    <span class="display-block fs-body-1 tc-black-2">{{poke.species}}</span>
+                </div>
+
+                <div class="list-row__secondary">
+                    <lx-icon lx-id="information" lx-size="xs" lx-color="grey" lx-type="flat" ng-click="pokemon.getPokemonById(poke.id)" ></lx-icon>
+                </div>
+            </li>
+        </ul>
+  </div>
+
+  <lx-dialog id="{{ pokemon.dialogId }}">
+    <lx-dialog-header>
+        <div class="toolbar bgc-primary pl++">
+            <span class="toolbar__label tc-white fs-title">
+                {{pokemon.pokeById.name}}
+            </span>
+        </div>
+    </lx-dialog-header>
+
+    <lx-dialog-content>
+      <div class="card">
+      <div flex-container="row">
+          <div class="card__img card__img--left" style="height: 160px">
+              <img src="../../bd_pokemon/pokemons/{{pokemon.pokeById.name}}.jpg">
+          </div>
+
+          <div flex-item flex-container="column">
+              <div flex-item>
+                  <div class="p+">
+                      <strong class="fs-headline display-block">{{pokemon.pokeById.species}}</strong>
+                      <span class="fs-subhead tc-black-2 display-block">{{pokemon.pokeById.type}}</span>
+                  </div>
+              </div>
+
+          </div>
+      </div>
+  </div>
+    </lx-dialog-content>
+
+    <lx-dialog-footer>
+        <lx-button lx-type="flat" lx-dialog-close>Ok</lx-button>
+    </lx-dialog-footer>
+</lx-dialog>
+
 </div>
