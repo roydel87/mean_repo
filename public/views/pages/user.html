@@ -1,6 +1,19 @@
 <div>
   <h1>User Page</h1>
-  <p>
-    {{user.message}}
-  </p>
+  <div>
+      <ul class="list mt++">
+            <li class="list-row list-row--has-separator" ng-repeat="Usuario in user.users">
+
+
+                <div class="list-row__content">
+                    <span>{{Usuario.name}}</span>
+                    <span class="display-block fs-body-1 tc-black-2">{{Usuario.username}}</span>
+                </div>
+
+                <div class="list-row__secondary">
+                    <lx-icon lx-id="information" lx-size="xs" lx-color="grey" lx-type="flat" ></lx-icon>
+                </div>
+            </li>
+        </ul>
+  </div>
 </div>

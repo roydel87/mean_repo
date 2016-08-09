@@ -56,30 +56,30 @@ module.exports = function(app,express){
 
 
   //middleware to verify the token
-  apiRouter.use(function(req,res,next){
-    console.log('Alguien ha entrado a la matrix!');
-    var token = req.body.token || req.query.token || req.headers['x-access-token'];
-    if(token){
-      //verify token
-      jwt.verify(token,supersecret,function(err,decoded){
-        if(err){
-          return res.json({
-            success: false,
-            message: 'Fallo la autentificacion del token.'
-          })
-        }else{
-          console.log(decoded);
-          req.decoded = decoded;
-          next();
-        }
-      })
-    }else{
-      return res.status(403).send({
-        success: false,
-        message: 'No se envio el token.'
-      })
-    }
-  })
+  // apiRouter.use(function(req,res,next){
+  //   console.log('Alguien ha entrado a la matrix!');
+  //   var token = req.body.token || req.query.token || req.headers['x-access-token'];
+  //   if(token){
+  //     //verify token
+  //     jwt.verify(token,supersecret,function(err,decoded){
+  //       if(err){
+  //         return res.json({
+  //           success: false,
+  //           message: 'Fallo la autentificacion del token.'
+  //         })
+  //       }else{
+  //         console.log(decoded);
+  //         req.decoded = decoded;
+  //         next();
+  //       }
+  //     })
+  //   }else{
+  //     return res.status(403).send({
+  //       success: false,
+  //       message: 'No se envio el token.'
+  //     })
+  //   }
+  // })
 
   apiRouter.get('/', function(req, res) {
       res.json({
