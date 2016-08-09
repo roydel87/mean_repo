@@ -81,11 +81,11 @@ module.exports = function(app,express){
     }
   })
 
-  apiRouter.get('/', function(req, res) {
-      res.json({
-          message: 'Welcome to Zion! (Our mother API)'
-      })
-  });
+  //apiRouter.get('/', function(req, res) {
+    //  res.json({
+      //    message: 'Welcome to Zion! (Our mother API)'
+      //})
+  //});
 
   apiRouter.get('/me',function(req,res){
     res.json({
