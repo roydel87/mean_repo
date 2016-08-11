@@ -4,16 +4,65 @@
       <ul class="list mt++">
             <li class="list-row list-row--has-separator" ng-repeat="Usuario in user.users">
 
-
                 <div class="list-row__content">
                     <span>{{Usuario.name}}</span>
                     <span class="display-block fs-body-1 tc-black-2">{{Usuario.username}}</span>
                 </div>
 
                 <div class="list-row__secondary">
-                    <lx-icon lx-id="information" lx-size="xs" lx-color="grey" lx-type="flat" ></lx-icon>
+                    <!--<lx-icon lx-id="information" lx-size="xs" lx-color="grey" lx-type="flat" ng-click="user.getUser(Usuario._id)" ></lx-icon>-->
+                    <lx-dropdown>
+                      <lx-dropdown-toggle>
+                          <lx-button>Actions</lx-button>
+                      </lx-dropdown-toggle>
+
+                      <lx-dropdown-menu>
+                          <ul>
+                              <li><a class="dropdown-link" ng-click="user.getUser(Usuario._id)">Get</a></li>
+                              <li><a class="dropdown-link" ng-click="user.deleteUser(Usuario._id)">Delete</a></li>
+                              <li><a class="dropdown-link" ng-click="user.getUser(Usuario._id)">Update</a></li>
+
+                          </ul>
+                      </lx-dropdown-menu>
+                  </lx-dropdown>
                 </div>
             </li>
         </ul>
   </div>
+  <div class="p+">
+    <lx-button lx-type="flat" ng-click="user.openCreateDialog()">Agregar</lx-button>
+  </div>
+  <lx-dialog id="{{ user.dialogId }}">
+    <lx-dialog-header>
+        <div class="toolbar bgc-primary pl++">
+            <span class="toolbar__label tc-white fs-title">
+                {{user.usuario.name}}
+            </span>
+        </div>
+    </lx-dialog-header>
+
+    <lx-dialog-content>
+      <div flex-item>
+        <lx-text-field lx-label="Name" lx-fixed-label="true" lx-icon="account">
+            <input type="text" ng-model="user.usuario.name">
+        </lx-text-field>
+
+        <lx-text-field lx-label="UserName" lx-fixed-label="true" lx-icon="account">
+            <input type="text" ng-model="user.usuario.username">
+        </lx-text-field>
+
+        <lx-text-field lx-label="Password" lx-fixed-label="true" lx-icon="account" ng-show="user.showPassword">
+            <input type="text" ng-model="user.usuario.password">
+        </lx-text-field>
+
+
+     </div>
+    </lx-dialog-content>
+
+    <lx-dialog-footer>
+        <lx-button lx-type="flat" ng-click="user.updateUser()" ng-show="!user.showPassword">update</lx-button>
+        <lx-button lx-type="flat" ng-click="user.createUser()" ng-show ="user.showPassword">save</lx-button>
+    </lx-dialog-footer>
+</lx-dialog>
+
 </div>

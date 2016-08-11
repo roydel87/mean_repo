@@ -20,19 +20,66 @@ angular.module('pokeApp.userServices',[])
 }
 
 this.get = function(id){
+  if(!_user){
+    var deferred = $q.defer();
+    $http.get("http://localhost:5000/api/users/" + id)
+      .success(function(response){
+        deferred.resolve(response);
+      })
+      .error(function(response){
+        deferred.reject(response);
+      })
+      _user = deferred.promise;
+  }
   return _user;
 }
 
-this.create = function(){
-  return _user;
+this.create = function(name,username,password){
+  var data = {
+    'name' : name,
+    'username' : username,
+    'password' : password
+  };
+  var deferred = $q.defer();
+  $http.post("http://localhost:5000/api/users",data)
+    .success(function(response){
+      deferred.resolve(response);
+    })
+    .error(function(response){
+      deferred.reject(response);
+    })
+    _user = deferred.promise;
+    return _user;
 }
 
-this.update = function(){
-  return _user;
+this.update = function(id,name,username){
+  var data = {
+    'name' : name,
+    'username' : username
+  };
+  var deferred = $q.defer();
+  $http.put("http://localhost:5000/api/users/" + id,data)
+    .success(function(response){
+      deferred.resolve(response);
+    })
+    .error(function(response){
+      deferred.reject(response);
+    })
+    _user = deferred.promise;
+    return _user;
 }
 
-this.delete = function(){
-  return _user;
+this.delete = function(id){
+  var deferred = $q.defer();
+  $http.delete("http://localhost:5000/api/users/" + id)
+    .success(function(response){
+      deferred.resolve(response);
+    })
+    .error(function(response){
+      deferred.reject(response);
+    })
+    _user = deferred.promise;
+    return _user;
 }
 
 })

@@ -3,9 +3,16 @@
   <p>
     {{login.message}}
   </p>
-  <div>
-    
-  </div>
+  <div flex-item>
+    <lx-text-field lx-label="Name" lx-fixed-label="true" lx-icon="account">
+        <input type="text" ng-model="user.usuario.name">
+    </lx-text-field>
+
+    <lx-text-field lx-label="UserName" lx-fixed-label="true" lx-icon="account">
+        <input type="text" ng-model="user.usuario.username">
+    </lx-text-field>
+
+ </div>
   <div class="p+">
     <lx-button lx-type="raised">Button</lx-button>
   </div>
