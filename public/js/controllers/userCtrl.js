@@ -4,7 +4,7 @@ angular.module('pokeApp.userCtrl',[])
   vm.message = "Este es el admin de usuario";
   vm.dialogId = 'dialog-user';
   vm.showPassword = false;
-  vm.id='undefined';
+  vm.id=undefined;
   vm.name = '';
   vm.username = '';
   vm.password = '';

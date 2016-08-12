@@ -1,19 +1,17 @@
 <div>
   <h1>Login Page</h1>
-  <p>
-    {{login.message}}
-  </p>
+  <hr>
   <div flex-item>
-    <lx-text-field lx-label="Name" lx-fixed-label="true" lx-icon="account">
-        <input type="text" ng-model="user.usuario.name">
+    <lx-text-field lx-label="Username" lx-fixed-label="true" lx-icon="account">
+        <input type="text" ng-model="login.username">
     </lx-text-field>
 
-    <lx-text-field lx-label="UserName" lx-fixed-label="true" lx-icon="account">
-        <input type="text" ng-model="user.usuario.username">
+    <lx-text-field lx-label="Password" lx-fixed-label="true" lx-icon="account">
+        <input type="password" ng-model="login.password">
     </lx-text-field>
 
  </div>
   <div class="p+">
-    <lx-button lx-type="raised">Button</lx-button>
+    <lx-button lx-type="raised" ng-click="login.login()">Login</lx-button>
   </div>
 </div>
