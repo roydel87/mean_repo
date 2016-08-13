@@ -25,9 +25,10 @@
 <body>
   <div class="card">
         <div class="card__actions" ng-controller="mainCtrl as main">
-            <lx-button lx-color="black" lx-type="flat" ng-click="main.goTo('/')">Login</lx-button>
-            <lx-button lx-color="orange" lx-type="flat" ng-click="main.goTo('/users')">Usuarios</lx-button>
-            <lx-button lx-color="orange" lx-type="flat" ng-click="main.goTo('/pokemons')">Pokemons</lx-button>
+            <!--<lx-button lx-color="black" lx-type="flat" ng-click="main.goTo('/')">Login</lx-button>-->
+            <lx-button lx-color="orange" lx-type="flat" ng-click="main.goTo('/users')" ng-if="main.loggedIn">Usuarios</lx-button>
+            <lx-button lx-color="orange" lx-type="flat" ng-click="main.goTo('/pokemons')" ng-if="main.loggedIn">Pokemons</lx-button>
+            <lx-button lx-color="orange" lx-type="flat" ng-click="main.logout()" ng-if="main.loggedIn">Logout</lx-button>
         </div>
         <main>
             <div ng-view></div>

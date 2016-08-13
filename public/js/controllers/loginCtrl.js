@@ -1,5 +1,5 @@
 angular.module('pokeApp.loginCtrl',[])
-.controller('loginCtrl',function(authServices){
+.controller('loginCtrl',function(authServices,$location){
   var vm = this;
   vm.message = "Este es el login";
 
@@ -7,10 +7,9 @@ angular.module('pokeApp.loginCtrl',[])
   vm.password = '';
 
   vm.login = function(){
-    console.log(vm.username);
-    console.log(vm.password);
     authServices.login(vm.username,vm.password).then(function(response){
-      console.log(response);
+      $location.path('/users')
+    
     })
   }
 

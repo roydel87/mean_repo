@@ -6,7 +6,7 @@ angular.module('pokeApp.userServices',[])
     if(!_users){
       var deferred = $q.defer();
 
-      $http.get("http://localhost:5000/api/users")
+      $http.get("/api/users")
         .success(function(response){
           deferred.resolve(response);
         })
@@ -22,7 +22,7 @@ angular.module('pokeApp.userServices',[])
 this.get = function(id){
   if(!_user){
     var deferred = $q.defer();
-    $http.get("http://localhost:5000/api/users/" + id)
+    $http.get("/api/users/" + id)
       .success(function(response){
         deferred.resolve(response);
       })
@@ -41,7 +41,7 @@ this.create = function(name,username,password){
     'password' : password
   };
   var deferred = $q.defer();
-  $http.post("http://localhost:5000/api/users",data)
+  $http.post("/api/users",data)
     .success(function(response){
       deferred.resolve(response);
     })
@@ -58,7 +58,7 @@ this.update = function(id,name,username){
     'username' : username
   };
   var deferred = $q.defer();
-  $http.put("http://localhost:5000/api/users/" + id,data)
+  $http.put("/api/users/" + id,data)
     .success(function(response){
       deferred.resolve(response);
     })

@@ -16,7 +16,11 @@ angular.module('pokeApp.authServices',[])
     }
 
     this.isLoggedIn = function(){
-      return AuthToken.getToken();
+      if(AuthToken.getToken()){
+        return true;
+      }else{
+        return false;
+      }
     }
 
     this.getUser = function(){

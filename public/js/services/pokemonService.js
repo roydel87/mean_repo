@@ -7,7 +7,7 @@ angular.module('pokeApp.pokemonServices',[])
       var deferred = $q.defer();
 
       //$http.get("bd_pokemon/pokemons.json")
-      $http.get("http://localhost:5000/api/pokemons")
+      $http.get("/api/pokemons")
         .success(function(response){
           deferred.resolve(response);
         })
@@ -25,7 +25,7 @@ angular.module('pokeApp.pokemonServices',[])
   this.get = function(id){
     if(!_pokemon){
       var deferred = $q.defer();
-      $http.get("http://localhost:5000/api/pokemons/" + id)
+      $http.get("/api/pokemons/" + id)
         .success(function(response){
           deferred.resolve(response);
         })
@@ -44,7 +44,7 @@ angular.module('pokeApp.pokemonServices',[])
   }
   this.delete = function(id){
     var deferred = $q.defer();
-    $http.delete("http://localhost:5000/api/pokemons/" + id)
+    $http.delete("/api/pokemons/" + id)
       .success(function(response){
         deferred.resolve(response);
       })
