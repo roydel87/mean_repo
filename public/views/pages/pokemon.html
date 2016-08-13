@@ -20,7 +20,9 @@
             </li>
         </ul>
   </div>
-
+  <div class="p+">
+    <lx-button lx-type="flat" ng-click="pokemon.openCreateDialog()">Agregar</lx-button>
+  </div>
   <lx-dialog id="{{ pokemon.dialogId }}">
     <lx-dialog-header>
         <div class="toolbar bgc-primary pl++">
@@ -31,7 +33,7 @@
     </lx-dialog-header>
 
     <lx-dialog-content>
-      <div class="card">
+      <div class="card" ng-show="pokemon.showCard">
       <div flex-container="row">
           <div class="card__img card__img--left" style="height: 160px">
               <img src="../../bd_pokemon/pokemons/{{pokemon.pokeById.name|lowercase}}.jpg">
@@ -47,11 +49,24 @@
 
           </div>
       </div>
-  </div>
+    </div>
+    <div class="card" ng-show="!pokemon.showCard">
+
+      <div flex-item >
+        <lx-text-field lx-label="Name" lx-fixed-label="true" lx-icon="account">
+            <input type="text" ng-model="pokemon.pokeById.name">
+        </lx-text-field>
+
+        <lx-text-field lx-label="type" lx-fixed-label="true" lx-icon="account">
+            <input type="text" ng-model="pokemon.pokeById.type">
+        </lx-text-field>
+     </div>
+   </div>
     </lx-dialog-content>
 
     <lx-dialog-footer>
-        <lx-button lx-type="flat" lx-dialog-close>Ok</lx-button>
+        <lx-button lx-type="flat" lx-dialog-close ng-show="pokemon.showCard">Ok</lx-button>
+        <lx-button lx-type="flat" lx-dialog-close ng-click="pokemon.createPokemon()" ng-show ="!pokemon.showCard">save</lx-button>
     </lx-dialog-footer>
 </lx-dialog>
 

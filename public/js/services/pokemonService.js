@@ -36,8 +36,17 @@ angular.module('pokeApp.pokemonServices',[])
     }
     return _pokemon;
   }
-  this.create = function(){
-
+  this.create = function(data){
+    var deferred = $q.defer();
+    $http.post("/api/pokemons",data)
+      .success(function(response){
+        deferred.resolve(response);
+      })
+      .error(function(response){
+        deferred.reject(response);
+      })
+      _pokemon = deferred.promise;
+      return _pokemon;
   }
   this.put = function(){
 
